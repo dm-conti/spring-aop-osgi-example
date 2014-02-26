@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1393415855138
+Build-Jdk: 1.7.0_51
+Built-By: ctenente
+Bundle-Activator: com.mkyong.customer.services.ServiceActivator
+Bundle-Blueprint: OSGI-INF/blueprint/serviceimpl.xml
+Bundle-ManifestVersion: 2
+Bundle-Name: com.mkyong.common.SpringExamples
+Bundle-SymbolicName: SpringExamples
+Bundle-Version: 1.0.0
+Created-By: Apache Maven Bundle Plugin
+Embed-Dependecy: *;scope=compile|runtime;inline=true
+Embed-Transitive: true
+Export-Package: com.mkyong.aop;uses:="org.aopalliance.aop,org.aopallianc
+ e.intercept,org.springframework.aop";version="1.0.0",com.mkyong.custome
+ r.services;uses:="org.osgi.framework";version="1.0.0",com.mkyong.common
+ ;version="1.0.0"
+Export-Service: com.mkyong.aop.OsgiProxyFactory
+Import-Package: org.aopalliance.aop;version="[1.0,2)",org.aopalliance.in
+ tercept;version="[1.0,2)",org.osgi.framework;version="[1.6,2)",org.spri
+ ngframework.aop;version="[2.5,3.4)",org.springframework.aop.framework;v
+ ersion="[2.5,3.4)",org.springframework.context;version="[2.5,3.4)",org.
+ springframework.context.support;version="[2.5,3.4)"
+Tool: Bnd-2.1.0.20130426-122213

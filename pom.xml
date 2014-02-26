@@ -1,0 +1,105 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.mkyong.common</groupId>
+	<artifactId>spring-aop-osgi-example</artifactId>
+	<packaging>bundle</packaging>
+	<version>1.0</version>
+
+	<name>SpringExamples</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<maven.compiler.source>1.6</maven.compiler.source>
+		<maven.compiler.target>1.6</maven.compiler.target>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Spring framework -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>3.2.4.RELEASE</version>
+		</dependency>
+
+		<!-- Proxy class need this library -->
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+
+		<dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+            <version>4.3.1</version>
+        </dependency>
+        <dependency>
+			<groupId>org.springframework.osgi</groupId>
+			<artifactId>spring-osgi-core</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+        <dependency>
+			<groupId>org.springframework.osgi</groupId>
+			<artifactId>spring-osgi-extender</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.aopalliance</groupId>
+		    <artifactId>com.springsource.org.aopalliance</artifactId>
+		    <version>1.0.0</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<!-- to generate the MANIFEST-FILE required by the bundle -->
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<executions>
+					<execution>
+						<id>bundle-manifest</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>manifest</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<manifestLocation>META-INF</manifestLocation>
+					<supportedProjectTypes>
+						<supportedProjectType>jar</supportedProjectType>
+						<supportedProjectType>bundle</supportedProjectType>
+					</supportedProjectTypes>
+					<instructions>
+						<Bundle-SymbolicName>${pom.artifactId}</Bundle-SymbolicName>
+						<Bundle-Name>${pom.groupId}.${pom.artifactId}</Bundle-Name>
+						<Embed-Dependecy>*;scope=compile|runtime;inline=true</Embed-Dependecy>
+						<Embed-Transitive>true</Embed-Transitive>
+						<Include-Resource>src/main/resources</Include-Resource>
+						<Import-Package>org.aopalliance.aop;version="[1.0,2)",
+						org.aopalliance.intercept;version="[1.0,2)",
+						org.osgi.framework;version="[1.6,2)",
+						org.springframework.aop;version="[2.5,3.4)",
+						org.springframework.aop.framework;version="[2.5,3.4)",
+						org.springframework.context;version="[2.5,3.4)",
+						org.springframework.context.support;version="[2.5,3.4)"
+						</Import-Package>
+						<Bundle-Activator>com.mkyong.customer.services.ServiceActivator</Bundle-Activator>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
